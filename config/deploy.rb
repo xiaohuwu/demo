@@ -12,7 +12,7 @@ set :application_name, 'rails-demo'
 set :domain, '47.106.115.20'
 set :port,'3118'
 set :user, 'root'
-set :deploy_to, "/data/wwww/demo"
+set :deploy_to, "/data/www/demo"
 set :repository, 'https://github.com/xiaohuwu/demo.git'
 set :branch, 'master'
 set :rvm_use_path, '/etc/profile.d/rvm.sh'
@@ -20,7 +20,7 @@ set :rvm_use_path, '/etc/profile.d/rvm.sh'
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
 #   set :port, '30000'           # SSH port number.
-#   set :forward_agent, true     # SSH forward_agent.
+set :forward_agent, false     # SSH forward_agent.
 
 # Shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 # Some plugins already add folders to shared_dirs like `mina/rails` add `public/assets`, `vendor/bundle` and many more
@@ -46,7 +46,7 @@ task :setup do
     path_database_yml = "config/database.yml"
     database_yml = %[production:
   database: #{fetch(:user)}
-  adapter: postgresql
+  adapter: mysql2
   pool: 5
   timeout: 5000]
     command %[test -e #{path_database_yml} || echo "#{database_yml}" > #{path_database_yml}]
